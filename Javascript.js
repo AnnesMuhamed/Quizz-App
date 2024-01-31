@@ -79,3 +79,19 @@ function showQuestion() {
     document.getElementById('answer_3').innerHTML = question['answer_3'];
     document.getElementById('answer_4').innerHTML = question['answer_4'];
 }
+
+function answer(selection) {
+    let question = questions[currentQuestion]; // Fragen sind hier gespeichert
+    console.log('Selected answer is ', selection); // Geklickte Frage
+    let selectedQuestionNumber = selection.slice(-1); // Dadurch wird der letzte buchstabe/zahl von Zeile 85 "selection" gespeichert. bsp. von answer_3 wird die 3 gespeichert.
+    console.log('selectedQuestionNumber is ', selectedQuestionNumber);
+    console.log('Current question is ', question['right_answer']); // Geklickte frage in voller Form
+
+    if(selectedQuestionNumber == question['right_answer']) {
+        console.log('Richtige Antwort!');
+        document.getElementById(selection).parentNode.classList.add('bg-success');
+    } else {
+        document.getElementById(selection).parentNode.classList.add('bg-danger');
+        console.log('Falsche Antwort!!!');
+    }
+}

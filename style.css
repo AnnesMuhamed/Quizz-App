@@ -25,3 +25,7 @@ body {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.2);
 } 
+
+.bg-success, .bg-danger {
+    color: white !important;
+}

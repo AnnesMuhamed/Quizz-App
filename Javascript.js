@@ -82,19 +82,32 @@ function showQuestion() {
 
 function answer(selection) {
     let question = questions[currentQuestion]; // Fragen sind hier gespeichert
-    console.log('Selected answer is ', selection); // Geklickte Frage
     let selectedQuestionNumber = selection.slice(-1); // Dadurch wird der letzte buchstabe/zahl von Zeile 85 "selection" gespeichert. bsp. von answer_3 wird die 3 gespeichert.
-    console.log('selectedQuestionNumber is ', selectedQuestionNumber);
-    console.log('Current question is ', question['right_answer']); // Geklickte frage in voller Form
-
     let idOfRightAnswer = `answer_${question['right_answer']}`; // Durch die deklarierte Variable let idOfRightAnswer, definiert die id in ${question['right_answer']}.
 
     if(selectedQuestionNumber == question['right_answer']) {
-        console.log('Richtige Antwort!');
         document.getElementById(selection).parentNode.classList.add('bg-success');
     } else {
         document.getElementById(selection).parentNode.classList.add('bg-danger');
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success'); // Und somit wird dies hier ebenfalls definiert
     }
     document.getElementById('next-button').disabled = false;
+}
+
+function nextQuestion() {
+    currentQuestion++; // mit currentQuestion++ gehen wir zum nächsten Array. von currentQuestion 0 auf 1
+    document.getElementById('next-button').disabled = true; // damit in der nächsten frage der Button nicht anklickbar ist bevor man den quiz beantwortet.
+    resetAnswerButton(); // damit die nächste function aufgerufen wird um alle fragen auf die normale farbe zurückzusetzten.
+    showQuestion(); // damit zeigen wir die nächste frage an.
+}
+
+function resetAnswerButton() {
+    document.getElementById('answer_1').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_1').parentNode.classList.remove('bg-success'); // beide farben verschwinden bzw. werden wieder auf normal zurückgesetzt.
+    document.getElementById('answer_2').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-success');
 }

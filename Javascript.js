@@ -87,11 +87,14 @@ function answer(selection) {
     console.log('selectedQuestionNumber is ', selectedQuestionNumber);
     console.log('Current question is ', question['right_answer']); // Geklickte frage in voller Form
 
+    let idOfRightAnswer = `answer_${question['right_answer']}`; // Durch die deklarierte Variable let idOfRightAnswer, definiert die id in ${question['right_answer']}.
+
     if(selectedQuestionNumber == question['right_answer']) {
         console.log('Richtige Antwort!');
         document.getElementById(selection).parentNode.classList.add('bg-success');
     } else {
         document.getElementById(selection).parentNode.classList.add('bg-danger');
-        console.log('Falsche Antwort!!!');
+        document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success'); // Und somit wird dies hier ebenfalls definiert
     }
+    document.getElementById('next-button').disabled = false;
 }

@@ -62,6 +62,8 @@ let questions = [
     }
 ];
 
+let rightQuestions = 0;
+
 let currentQuestion = 0;
 
 function init() {
@@ -76,6 +78,9 @@ function showQuestion() {
     if(currentQuestion >= questions.length) {
         document.getElementById('endScreen').style = '';
         document.getElementById('questionBody').style = 'display: none';
+
+        document.getElementById('amount-of-Questions').innerHTML = questions.length;
+        document.getElementById('amount-of-right-questions').innerHTML = rightQuestions;
     } else {
         let question = questions[currentQuestion];
 
@@ -97,6 +102,7 @@ function answer(selection) {
 
     if(selectedQuestionNumber == question['right_answer']) {
         document.getElementById(selection).parentNode.classList.add('bg-success');
+        rightQuestions++;
     } else {
         document.getElementById(selection).parentNode.classList.add('bg-danger');
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success'); // Und somit wird dies hier ebenfalls definiert

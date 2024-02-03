@@ -63,8 +63,9 @@ let questions = [
 ];
 
 let rightQuestions = 0;
-
 let currentQuestion = 0;
+let AUDIO_SUCCESS = new Audio('audio/success.mp3');
+let AUDIO_FAIL = new Audio('audio/fail.mp3');
 
 function init() {
     document.getElementById('all-questions').innerHTML = questions.length;
@@ -85,12 +86,7 @@ function showQuestion() {
 
     
     if(currentQuestion >= questions.length) {
-        document.getElementById('endScreen').style = '';
-        document.getElementById('questionBody').style = 'display: none';
-
-        document.getElementById('amount-of-Questions').innerHTML = questions.length;
-        document.getElementById('amount-of-right-questions').innerHTML = rightQuestions;
-        document.getElementById('header-image').src = './img/pokal.jpg';  // Hier wird im Endscreen das erste bild durch das zweite bild ersetzt.
+        endScreen();
 
         
     
@@ -117,10 +113,12 @@ function answer(selection) {
 
     if(selectedQuestionNumber == question['right_answer']) {
         document.getElementById(selection).parentNode.classList.add('bg-success');
+        AUDIO_SUCCESS.play(); // Um die mp3 für die richtige Antwort abzuspielen
         rightQuestions++;
     } else {
         document.getElementById(selection).parentNode.classList.add('bg-danger');
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success'); // Und somit wird dies hier ebenfalls definiert
+        AUDIO_FAIL.play(); // Audio bei Falscher Antwort
     }
     document.getElementById('next-button').disabled = false;
 
@@ -145,6 +143,14 @@ function resetAnswerButton() {
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
 
     showQuestion();
+}
+
+function endScreen() {
+    document.getElementById('endScreen').style = '';
+    document.getElementById('questionBody').style = 'display: none';
+    document.getElementById('amount-of-Questions').innerHTML = questions.length;
+    document.getElementById('amount-of-right-questions').innerHTML = rightQuestions;
+    document.getElementById('header-image').src = './img/pokal.jpg';  // Hier wird im Endscreen das erste bild durch das zweite bild ersetzt.
 }
 
 function restartGame () { // Spiel wird von neu Gestartet

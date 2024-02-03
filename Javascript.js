@@ -67,11 +67,11 @@ let rightQuestions = 0;
 let currentQuestion = 0;
 
 function init() {
-        document.getElementById('all-questions').innerHTML = questions.length;
-        document.getElementById('progress-bar').innerHTML = '0%';
-        document.getElementById('progress-bar').style = 'width: 0%;';
-    
-        showQuestion();
+    document.getElementById('all-questions').innerHTML = questions.length;
+    document.getElementById('progress-bar').innerHTML = '0%';
+    document.getElementById('progress-bar').style = 'width: 0%;';
+
+    showQuestion();
     
 }
 
@@ -145,4 +145,13 @@ function resetAnswerButton() {
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
 
     showQuestion();
+}
+
+function restartGame () { // Spiel wird von neu Gestartet
+    document.getElementById('header-image').src = './img/illustration.jpg'; // Erstes Bild wieder einblenden
+    document.getElementById('endScreen').style = 'display: none'; // Endscreen ausblenden
+    document.getElementById('questionBody').style = ''; // Fragen wieder einblenden
+    rightQuestions = 0; 
+    currentQuestion = 0;
+    init();
 }

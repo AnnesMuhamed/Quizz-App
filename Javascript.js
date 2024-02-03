@@ -67,21 +67,36 @@ let rightQuestions = 0;
 let currentQuestion = 0;
 
 function init() {
-    document.getElementById('all-questions').innerHTML = questions.length;
-
-    showQuestion();
+        document.getElementById('all-questions').innerHTML = questions.length;
+        document.getElementById('progress-bar').innerHTML = '0%';
+        document.getElementById('progress-bar').style = 'width: 0%;';
+    
+        showQuestion();
+    
 }
 
 function showQuestion() {
+    let percent = (currentQuestion) / questions.length * 100;
+    percent = Math.round(percent);
+    let progressBar = document.getElementById('progress-bar');
 
+    progressBar.innerHTML = `${percent}%`;
+    progressBar.style = `width: ${percent}%;`;
 
+    
     if(currentQuestion >= questions.length) {
         document.getElementById('endScreen').style = '';
         document.getElementById('questionBody').style = 'display: none';
 
         document.getElementById('amount-of-Questions').innerHTML = questions.length;
         document.getElementById('amount-of-right-questions').innerHTML = rightQuestions;
+        document.getElementById('header-image').src = './img/pokal.jpg';  // Hier wird im Endscreen das erste bild durch das zweite bild ersetzt.
+
+        
+    
     } else {
+        
+
         let question = questions[currentQuestion];
 
         document.getElementById('number-question').innerHTML = currentQuestion + 1;
@@ -108,6 +123,8 @@ function answer(selection) {
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success'); // Und somit wird dies hier ebenfalls definiert
     }
     document.getElementById('next-button').disabled = false;
+
+    showQuestion();
 }
 
 function nextQuestion() {
@@ -126,4 +143,6 @@ function resetAnswerButton() {
     document.getElementById('answer_3').parentNode.classList.remove('bg-success');
     document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
+
+    showQuestion();
 }

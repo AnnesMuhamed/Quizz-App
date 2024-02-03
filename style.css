@@ -37,3 +37,8 @@ body {
 .text-center {
     text-align: center;
 }
+
+.endscreen-headline {
+    font-size: 38px;
+    margin-bottom: 32px;
+}

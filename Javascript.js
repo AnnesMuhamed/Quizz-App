@@ -77,34 +77,18 @@ function init() {
 }
 
 function showQuestion() {
-    let percent = (currentQuestion) / questions.length * 100;
-    percent = Math.round(percent);
-    let progressBar = document.getElementById('progress-bar');
-
-    progressBar.innerHTML = `${percent}%`;
-    progressBar.style = `width: ${percent}%;`;
-
-    
-    if(currentQuestion >= questions.length) {
+    if(gameIsOver()) {
         endScreen();
 
-        
-    
     } else {
-        
-
-        let question = questions[currentQuestion];
-
-        document.getElementById('number-question').innerHTML = currentQuestion + 1;
-        document.getElementById('questiontext').innerHTML = question['question'];
-        document.getElementById('answer_1').innerHTML = question['answer_1'];
-        document.getElementById('answer_2').innerHTML = question['answer_2'];
-        document.getElementById('answer_3').innerHTML = question['answer_3'];
-        document.getElementById('answer_4').innerHTML = question['answer_4'];
+        updateToNextQuestion();
+        updateProgressBar();
     }
 }
 
-
+function gameIsOver() {
+    return currentQuestion >= questions.length
+}
 
 function answer(selection) {
     let question = questions[currentQuestion]; // Fragen sind hier gespeichert
@@ -130,6 +114,26 @@ function nextQuestion() {
     document.getElementById('next-button').disabled = true; // damit in der nächsten frage der Button nicht anklickbar ist bevor man den quiz beantwortet.
     resetAnswerButton(); // damit die nächste function aufgerufen wird um alle fragen auf die normale farbe zurückzusetzten.
     showQuestion(); // damit zeigen wir die nächste frage an.
+}
+
+function updateToNextQuestion () {
+    let question = questions[currentQuestion];
+
+    document.getElementById('number-question').innerHTML = currentQuestion + 1;
+    document.getElementById('questiontext').innerHTML = question['question'];
+    document.getElementById('answer_1').innerHTML = question['answer_1'];
+    document.getElementById('answer_2').innerHTML = question['answer_2'];
+    document.getElementById('answer_3').innerHTML = question['answer_3'];
+    document.getElementById('answer_4').innerHTML = question['answer_4'];
+}
+
+function updateProgressBar() {
+    let progressBar = document.getElementById('progress-bar');
+    let percent = (currentQuestion + 1) / questions.length * 100;
+    percent = Math.round(percent);
+    
+    progressBar.innerHTML = `${percent}%`;
+    progressBar.style = `width: ${percent}%;`;
 }
 
 function resetAnswerButton() {
